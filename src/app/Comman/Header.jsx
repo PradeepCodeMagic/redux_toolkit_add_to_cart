@@ -5,26 +5,29 @@ import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
+import { FaShoppingCart } from 'react-icons/fa';
 import { useSelector } from 'react-redux';
 
 export default function Header() {
-  const items = useSelector((state)=>state.wish);
+  const allCartItem = useSelector((state)=>state.cart.cartItem);
+
   return (
-    <Navbar expand="lg" className=" bg-info  ">
-      <Container>
-        <Navbar.Brand >
-          <Link href="/" >Logo</Link>
-        </Navbar.Brand>
-        <Navbar.Toggle aria-controls="basic-navbar-nav" />
-        <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className="me-auto">
-            <Link href="/Home">Home</Link> &nbsp;&nbsp;
-            <Link href="/wishlist">wishlist {items.length} </Link>&nbsp;&nbsp;
-            <Link href="/cart"> Cart</Link>&nbsp;&nbsp;
-            
-          </Nav>
-        </Navbar.Collapse>
-      </Container>
-    </Navbar>
+   <>
+   <Container fluid className='bg-black py-3' >
+   <Container>
+      <div className='d-flex justify-content-between text-white'>
+        <div className='fs-2'> 
+            <Link href="/" className='text-white text-decoration-none'> Ecommerce </Link>
+         </div>
+        <div className='fs-2'> 
+        <Link className='text-white text-decoration-none' href="/cart" >
+        <FaShoppingCart /> {allCartItem.length>0 ? <sup className='fs-6 bg-danger rounded-circle p-1 '>{allCartItem.length}  </sup> : ""} 
+        </Link>
+         </div>
+      </div>
+    </Container>
+   </Container>
+   
+   </>
   )
 }
